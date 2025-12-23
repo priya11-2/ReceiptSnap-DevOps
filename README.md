@@ -32,20 +32,60 @@ The application follows a cloud-native, event-driven architecture.
 ![Architecture Diagram](aws/architecture.png)
 
 ---
+---
 
 ## 🔁 CI/CD Pipeline Overview
 
 ### CI (GitHub Actions)
-- Triggered on code push to main branch
-- Builds Docker image
+- Triggered on code push to `main` branch
+- Builds Docker image using root-level Dockerfile
 - Tags image with commit SHA
 - Pushes image to Docker Hub
 
-### CD (AWS EC2)
+**CI Commands (run automatically in GitHub Actions):
+
+docker build -t receiptsnap-backend:latest .
+docker push yourdockerhub/receiptsnap-backend:latest 
+
+### CD (AWS-EC2)
 - EC2 runner pulls latest Docker image
-- Deployment script runs container
+- Stops old container (if any)
+- Runs new container
 - Environment variables injected securely
 - Application becomes live automatically
+
+**CD Commands (on EC2):
+
+docker stop receiptsnap || true
+docker rm receiptsnap || true
+docker pull yourdockerhub/receiptsnap-backend:latest
+docker run -d --name receiptsnap -p 80:3000 yourdockerhub/receiptsnap-backend:latest
+---
+
+## Local Setup Instructions
+
+###1. Prerequisites
+	-	Git installed
+	-	Docker installed (v20+)
+	-	Node.js installed (v20+)
+	-	AWS CLI configured
+	-	Docker Hub account access
+
+###2. Clone Repository
+
+git clone https://github.com/username/ReceiptSnap-DevOps.git
+cd ReceiptSnap-DevOps
+
+###3. Install Dependencies
+
+npm install
+cp .env.example .env
+node index.js
+
+###4. Docker Build & Run Locally
+
+docker build -t receiptsnap-backend:latest .
+docker run -d --name receiptsnap -p 3000:3000 receiptsnap-backend:latest
 
 ---
 
@@ -71,6 +111,12 @@ The application follows a cloud-native, event-driven architecture.
 - Git & GitHub
 
 ---
+##📌 References
+	- GitHub Actions Docs￼
+	- Docker Docs￼
+	-	AWS Docs￼
+
+---
 
 ## 📌 Credits & Acknowledgement
 
@@ -82,6 +128,6 @@ maintained in the following repositories:
 - Backend: https://github.com/pratik50/ReceiptSnap-Backend  
 - Android Frontend: https://github.com/pratik50/ReceiptSnap-Frontend-Android  
 
-This repository focuses specifically on the **DevOps & Cloud infrastructure**
-layer of the project, which was **collaboratively implemented** to handle
+This repository focuses specifically on the DevOps & Cloud infrastructure
+layer of the project, which was collaboratively implemented to handle
 containerization, CI/CD automation, cloud deployment, and monitoring.
