@@ -46,6 +46,7 @@ The application follows a cloud-native, event-driven architecture.
 ```bash
 docker build -t receiptsnap-backend:latest .
 docker push yourdockerhub/receiptsnap-backend:latest
+```
 
 ### CD (AWS-EC2)
 - EC2 runner pulls latest Docker image
@@ -55,38 +56,40 @@ docker push yourdockerhub/receiptsnap-backend:latest
 - Application becomes live automatically
 
 **CD Commands (on EC2):
-
+```bash
 docker stop receiptsnap || true
 docker rm receiptsnap || true
 docker pull yourdockerhub/receiptsnap-backend:latest
 docker run -d --name receiptsnap -p 80:3000 yourdockerhub/receiptsnap-backend:latest
+```
 ---
 
 ## Local Setup Instructions
 
-###1. Prerequisites
+### 1. Prerequisites
 	-	Git installed
 	-	Docker installed (v20+)
 	-	Node.js installed (v20+)
 	-	AWS CLI configured
 	-	Docker Hub account access
 
-###2. Clone Repository
-
+### 2. Clone Repository
+```
 git clone https://github.com/username/ReceiptSnap-DevOps.git
 cd ReceiptSnap-DevOps
+```
 
-###3. Install Dependencies
-
+### 3. Install Dependencies
+```
 npm install
 cp .env.example .env
 node index.js
-
-###4. Docker Build & Run Locally
-
+```
+### 4. Docker Build & Run Locally
+```
 docker build -t receiptsnap-backend:latest .
 docker run -d --name receiptsnap -p 3000:3000 receiptsnap-backend:latest
-
+```
 ---
 
 ## ☁️ AWS Services Used
@@ -111,7 +114,7 @@ docker run -d --name receiptsnap -p 3000:3000 receiptsnap-backend:latest
 - Git & GitHub
 
 ---
-##📌 References
+## 📌 References
 	- GitHub Actions Docs￼
 	- Docker Docs￼
 	-	AWS Docs￼
