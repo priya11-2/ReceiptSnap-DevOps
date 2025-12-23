@@ -42,10 +42,10 @@ The application follows a cloud-native, event-driven architecture.
 - Tags image with commit SHA
 - Pushes image to Docker Hub
 
-**CI Commands (run automatically in GitHub Actions):
-
+**CI Commands (run automatically in GitHub Actions):**
+```bash
 docker build -t receiptsnap-backend:latest .
-docker push yourdockerhub/receiptsnap-backend:latest 
+docker push yourdockerhub/receiptsnap-backend:latest
 
 ### CD (AWS-EC2)
 - EC2 runner pulls latest Docker image
