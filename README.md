@@ -32,7 +32,6 @@ The application follows a cloud-native, event-driven architecture.
 ![Architecture Diagram](aws/architecture.png)
 
 ---
----
 
 ## 🔁 CI/CD Pipeline Overview
 
